@@ -1,76 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="bootstrap/bootstrap.bundle.min.js"></script>
-  	<link href="css/style.css" type="text/css" rel="stylesheet">
-	<link href="bootsrap/bootstrap.min.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ovulation Predictor Calc in Vue</title>
+</head>
+<body>
+
+  <section class="hero is-primary has-text-centered">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1">Ovulation Predictor Calculator</h1>
+    </div>
+  </div>
+  </section>
+  
+  <section id="app" class="section content has-text-centered">
+    
+<transition name="fade" mode="out-in">
+    <div class="content columns level is-centered
+" v-if="!calcReturned" key="calendar">
+
+      <div class="column is-one-third level has-text-centered ">
+        <p class="subtitle">Please select the first day of your last menstrual period:</p>
+        <vuejs-datepicker :inline="true" v-model="date">{{ date }}</vuejs-datepicker>
+      </div>
+
+      <div class="column is-one-third has-text-centered level">
+        <p>Usual number of days in your cycle:</p>
+        <div class="select is-primary">
+          <select name="days" v-model="cycleSelected">
+            <option v-for="n in 45" v-if="n >= 20">{{ n }}</option>
+          </select>
+        </div>
+
+        <div class="level-item">
+          <button class="button is-large is-primary is-rounded " id="calculate-btn" @click="startCalc(); calculateFertileBegin(); calculateFertileEnds(); calculateDueDate();">Calculate</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content has-text-centered" v-else key="result">
+
+      <p class="subtitle">Here are the results based on the information you provided:</p>
+      <p>Your next most fertile period is <strong>{{ fertileFrom }}</strong> to <strong>{{ fertileUntil }}</strong>.</p>
+      <p>If you conceive within this timeframe, your estimated due date will be <strong>{{ dueDate }}</strong>.</p>
+      <div class="level-item">
+        <button class="button is-large is-primary is-rounded" id="resetCalc" @click="resetCalc">Calculate Again</button>
+      </div>
+
+    </div>
+</transition>
+    
+    <div class="notification is-full">*Average length will vary by woman. **A woman's best days to conceive can start at least one day prior and last at least one day after fertile date.
+    </div>
+
+  </section>
+</body>
+
+</html>
+
 <style>
-		.header {
-  padding, 50px;
-  text-align, center;
-  background, #bbf0e5;
-  color, white;
-  font-size, 30px;
+
+  /* Override Vue Datepicker CSS */
+
+.vdp-datepicker__calendar {
+    width: 100% !important;
+}
+.vdp-datepicker__calendar .cell.selected {
+    background: #00d2b2 !important;
+    color: #fff;
+    font-weight: bold;
+}
+.vdp-datepicker__calendar .cell:not(.blank):not(.disabled).day:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).month:hover, .vdp-datepicker__calendar .cell:not(.blank):not(.disabled).year:hover {
+    border: 1px solid #00d2b2 !important;
+}
+.vdp-datepicker__calendar .cell.selected:hover {
+    background: #00d2b2 !important;
+}
+.select {
+  margin-bottom: 1em;
+}
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity 1.5s;
+}
+.fade-leave {
+  opacity: 0;
+}
+.fade-leave-active {
 }
 </style>
 
-</head>
-<body>
-  
- 	<div class="header">
-		<figure>
-			<h1>First trimester</h1>
-			<img src="img/tremester.jpeg">
-		</figure>
-	</div>
-<iframe width="1310" height="300" src="https,//www.youtube.com/embed/h82ltr84_Yg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<script>
+  // Ovulation Predictor Calculator using Vue.js + Vue Datepicker + MomentJS + Bulma CSS
 
+new Vue({
+  el: '#app',
+  components: {
+  	vuejsDatepicker
+  },
+  data() {
+    return {
+      calcReturned: false,
+      date: new Date(),
+      cycleSelected: 28,
+      fertileFrom: "",
+      fertileUntil: "",
+      dueDate: "",
+      fullDate: "",
+    };
+  },
+  methods: {
+    startCalc: function() {
+      this.calcReturned = true;
+    },
+    calcDate: function() {
+      var day = parseInt(document.querySelector("span.day.selected").innerHTML);
+      var month = document.querySelector("span.month.selected").innerHTML;
+      var year = parseInt(document.querySelector("span.year.selected").innerHTML);
 
-
-<div class="row">
-  <div class="col-sm-8">
-    <div class="card">
-      <div class="card-body">
-<div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingOne">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        Accordion Item #1
-      </button>
-    </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingTwo">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-        Accordion Item #2
-      </button>
-    </h2>
-    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="flush-headingThree">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-        Accordion Item #3
-      </button>
-    </h2>
-    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-    </div>
-  </div>
-</div>
-      </div>
-      </div>
-      </div>
-      </div>
-
-
-</body>
-</html>
+      var months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
+      
+      months.forEach(function (value, i) {
+      if (value === month && i <= 8 ) {
+        i ++;
+        month = "0" + i.toString();
+      } else if (value === month && i >= 9 ) {
+          i ++;
+        month = i.toString();
+      }
+      });
+      
+      this.fullDate = year + "" + month + "" + day;
+    },
+    calculateFertileBegin: function() {
+      this.calcDate();
+      if ( this.cycleSelected === 28) {
+        this.fertileFrom = moment(this.fullDate, 'YYYYMMDD').add(12, 'days').format('MMMM Do YYYY');
+      } else {
+          this.fertileFrom = moment(this.fullDate, 'YYYYMMDD').add(this.cycleSelected - 28 + 12, 'days').format('MMMM Do YYYY');  
+      }
+    },    
+    calculateFertileEnds: function() {
+      //this.calcDate(); is called from calculateFertileBegin
+      if ( this.cycleSelected === 28) {
+        this.fertileUntil = moment(this.fullDate, 'YYYYMMDD').add(16, 'days').format('MMMM Do YYYY');
+      } else {
+          this.fertileUntil = moment(this.fullDate, 'YYYYMMDD').add(this.cycleSelected - 28 + 16, 'days').format('MMMM Do YYYY');  
+      }
+    },
+    calculateDueDate: function() {
+      //this.calcDate(); is called from calculateFertileBegin
+      if ( this.cycleSelected === 28) {
+        this.dueDate = moment(this.fullDate, 'YYYYMMDD').add(280, 'days').format('MMMM Do YYYY');
+      } else {
+          this.dueDate = moment(this.fullDate, 'YYYYMMDD').add(this.cycleSelected - 28 + 280, 'days').format('MMMM Do YYYY');  
+      }
+    },
+    resetCalc: function() {
+      this.calcReturned = false;
+      this.date = new Date();
+      this.cycleSelected = 28;
+      this.fertileFrom = "";
+      this.fertileUntil = "";
+      this.dueDate = "";
+      this.fullDate = "";
+    },
+  },
+});
+</script>
