@@ -193,32 +193,32 @@
 
     .rectangle {
         height: 30px;
-        width: 70px;
-        margin-left: 20px;
-
-        background-color: rgb(22, 50, 175);
+        width: 50px;
+        background-color: #ee10f6;
+        
     }
 
     .rectangle1 {
         height: 30px;
-        width: 70px;
-        margin-left: 20px;
-
+        width: 50px;
         background-color: red;
     }
 
     .rectangle2 {
         height: 30px;
-        width: 70px;
-        margin-left: 20px;
+        width: 50px;
+        background-color: #7e70ff;
+    }
 
-        background-color: violet;
+    .rectangle3{
+        height: 30px;
+        width: 50px;
+        background-color: cyan;
     }
 
     .mdec {
         height: 30px;
         width: 30px;
-
         background-color: rgb(248, 69, 179);
 
     }
@@ -226,7 +226,6 @@
     .minc {
         height: 30px;
         width: 30px;
-
         background-color: rgb(248, 69, 179);
     }
 

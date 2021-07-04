@@ -1,3 +1,381 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="css.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Datepicker libs-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css"
+        rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+
+<style>      /*Change in default elements*/
+
+    body {
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+
+    .table-bordered {
+        text-align: center;
+        background: #FFF1FE;
+
+    }
+
+    h5 {
+        font-family: Helvetica Rounded LT;
+        font-size: 18px;
+        color: #f055f0;
+        text-align: left;
+    }
+
+    .roundedge {
+        border: 2px solid rgb(248, 69, 179);
+    }
+
+    .btn {
+        background-color: #ddd;
+        border: none;
+        color: black;
+        padding: 3px 32px;
+        text-align: center;
+        font-size: 16px;
+        margin: 50px 2px;
+        transition: 0.3s;
+
+    }
+
+    .btn:hover {
+        background-color: #e43788;
+        color: white;
+    }
+
+    .red {
+        color: white;
+        background-color:#F36;
+
+    }
+
+    .violet {
+        color: white;
+        background-color: #7e70ff;
+
+    }
+
+    .pink {
+        color: white;
+        background-color:#ee10f6;
+    }
+
+    .cyan {
+        color: white;
+        background-color:#00aeef;
+    }
+
+    #month1 td {
+        padding: 3px !important;
+        width: 250px;
+        height: 150;
+    }
+
+    #month2 td {
+        padding: 3px !important;
+        width: 250px;
+        height: 150;
+    }
+
+    #month3 td {
+        padding: 3px !important;
+        width: 250px;
+        height: 150;
+    }
+
+    th {
+        width: 65px;
+        text-align: center;
+        color: #fff;
+        font-size: 25px;
+        background: #ec1a9c;
+    }
+
+    li {
+        height: 80px;
+        font-size: 20px;
+    }
+
+    /*Application Classes*/
+
+    .numberCircle {
+        border-radius: 50%;
+        behavior: url(PIE.htc);
+        /* remove if you don't care about IE8 */
+        width: 55px;
+        height: 55px;
+        padding: 5px;
+        background: transparent;
+        color: #1f1e1e;
+        text-align: center;
+        font: 28px Arial, sans-serif;
+        display: inline-block;
+    }
+
+    #dno {
+        text-align: center;
+        width: 100%;
+        padding: 10px 0px;
+    }
+
+    .unCircle {
+        border-radius: 50%;
+        behavior: url(PIE.htc);
+        /* remove if you don't care about IE8 */
+        width: 55px;
+        height: 55px;
+        padding: 5px;
+        background: transparent;
+        text-align: center;
+        font: 28px Arial, sans-serif;
+        display: inline-block;
+        cursor: default !important;
+        color: #aaa !important;
+    }
+
+    .numberCircle:hover {
+        border: 1px solid #e40dda;
+        background: #e40dda;
+    }
+
+    .spin {
+        font-size: 35px;
+        color: #8a6d3b !important;
+    }
+
+
+    .cal-head {
+        background: #fff;
+        height: 30px;
+        align-content: center;
+    }
+
+    .month-head {
+        background: #e4229a !important;
+        color: #fff !important;
+        padding: 5px 0px;
+    }
+
+    .month-head h4 {
+        color: #fff !important;
+
+    }
+
+    .monthYear {
+        color: #fff !important;
+    }
+
+    .spin-div {
+        text-align: center;
+        font-size: 60px;
+    }
+
+    .modal-title {
+        padding-top: 20px;
+        width: 100% !important;
+    }
+
+
+
+    #titl {
+        text-align: center;
+    }
+
+    label {
+        margin-left: 20px;
+    }
+
+    #datepicker {
+        width: 200px;
+        margin: 0 20px 0px 0px;
+    }
+
+    #datepicker>span:hover {
+        cursor: pointer;
+    }
+
+
+    .rectangle {
+        height: 30px;
+        width: 50px;
+        background-color: #ee10f6;
+        
+    }
+
+    .rectangle1 {
+        height: 30px;
+        width: 50px;
+        background-color: red;
+    }
+
+    .rectangle2 {
+        height: 30px;
+        width: 50px;
+        background-color: #7e70ff;
+    }
+
+    .rectangle3{
+        height: 30px;
+        width: 50px;
+        background-color: cyan;
+    }
+
+    .mdec {
+        height: 30px;
+        width: 30px;
+        background-color: rgb(248, 69, 179);
+
+    }
+
+    .minc {
+        height: 30px;
+        width: 30px;
+        background-color: rgb(248, 69, 179);
+    }
+
+    .ddec {
+        height: 30px;
+        width: 30px;
+        background-color: rgb(248, 69, 179);
+
+    }
+
+    .dinc {
+        height: 30px;
+        width: 30px;
+
+        background-color: rgb(248, 69, 179);
+
+    }
+
+    h4 {
+        background: #fae3fa;
+        border-radius: 5px;
+        font-family: Arial;
+        font-size: 12;
+        text-align: center;
+
+    }
+
+ 
+</style>
+</head>
+
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <h5>WHEN DID YOUR LAST PERIOD START?</h5>
+                <input class="roundedge" id="datepicker" width="206" style="text-align:center; color: palevioletred" />
+            </div>
+            <div class="col-sm-3">
+                <h5>HOW MANY DAYS DID IT LAST?</h5>
+                <button class="ddec" onclick="ddec()">-</button>
+
+                <input class="roundedge" id="pdays" width="276" value=5
+                    style="text-align:center; color: palevioletred" />
+                <button class="dinc" onClick="dinc()">+</button>
+            </div>
+            <div class="col-sm-3">
+                <h5>HOW LONG IS YOUR MENSTRUAL?</h5>
+                <button class="mdec" onclick="mdec()">-</button>
+                <input class="roundedge" id="plength" width="276" value=28
+                    style="text-align:center; color: palevioletred" />
+                <button class="minc" onClick="minc()">+</button>
+            </div>
+
+            <div class="col-sm-3">
+                <button class="btn" onclick="generate()">Click</button>
+
+            </div>
+
+            <!-- <div class="col-sm-3">
+                <button class="btn" onclick="generateCal('05/23/2019')">Any date</button>
+
+            </div> -->
+
+        
+
+        </div>
+        </br><br />
+        <div class="row">
+            <div class="col-md-1">
+                <a href="#" id="page-left" onclick="prevMonth()"><i class="fa fa-arrow-left"></i></a>
+            </div>
+
+            <div class="col-md-10">
+            </div>
+
+            <div class="col-md-1">
+                <a href="#" id="page-right" onclick="nextMonth()"><i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <h4 id="monthOneName"></h4>
+                <table  id="month1" class="table-bordered">
+                </table>
+            </div>
+            <div class="col-sm">
+                <h4 id="monthTwoName"></h4>
+                <table id="month2" class="table-bordered">
+                </table>
+            </div>
+            <div class="col-sm">
+                <h4 id="monthThreeName"></h4>
+                <table id="month3" class="table-bordered">
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="js.js" language="javascript">
+    </script>
+    <br />
+    <br />
+    <div class="row">
+        <div class=" col-sm-2"></div>
+        <div class=" col-sm-1 rectangle"></div>
+        <div class="col-sm-1">periods</div>
+
+        <div class=" col-sm-1 rectangle1"></div>
+        <div class="col-sm-1">pre</div>
+
+        <div class=" col-sm-1 rectangle2"></div>
+        <div class="col-sm-1">post</div>
+
+        <div class=" col-sm-1 rectangle3"></div>
+        <div class="col-sm-1">peakOvulation</div>
+        <div class=" col-sm-2"></div>
+        
+    </div>
+
+<script>
 $(function () {
     $("#datepicker").datepicker({
         autoclose: true,
@@ -100,6 +478,8 @@ function myFunction() {
                 let cell1 = row.insertCell(j);
                 cell1.className = monthOneDays[i + j + b1].class;
                 let x = document.createElement("span");
+
+                x.className = monthOneDays[i + j + b1].class;
                 x.innerHTML = monthOneDays[i + j + b1].date;
                 cell1.append(x);
             }
@@ -113,6 +493,7 @@ function myFunction() {
                 let cell1 = row.insertCell(j);
                 cell1.className = monthTwoDays[i + j + b2].class;
                 let x = document.createElement("span");
+                x.className = monthTwoDays[i + j + b2].class;
                 x.innerHTML = monthTwoDays[i + j + b2].date;
                 cell1.append(x);
             }
@@ -122,10 +503,12 @@ function myFunction() {
     for (i = 0; i < monthThreeDays.length / 7; i++) {
         let row = monthThreeTable.insertRow(i);
         for (j = 0; j < 7; j++) {
+            // //console.log("i", i, "j", j, "i+j", i + j, "b1", b1)
             if (monthThreeDays[i + j + b3] != undefined) {
                 let cell1 = row.insertCell(j);
                 cell1.className = monthThreeDays[i + j + b3].class;
                 let x = document.createElement("span");
+                x.className = monthThreeDays[i + j + b3].class;
                 x.innerHTML = monthThreeDays[i + j + b3].date;
                 cell1.append(x);
             }
@@ -347,3 +730,6 @@ $(document).ready(function () {
     let d = new Date();
     let n = d.getMonth();
 });
+</script>
+</body>
+</html> 
