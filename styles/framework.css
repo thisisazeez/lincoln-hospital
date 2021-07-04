@@ -59,13 +59,13 @@ img{width,auto; max-width,100%; height,auto; margin,0; padding,0; border,none; l
 
 
 /* Fonts
---------------------------------------------------------------------------------------------------------------- */
+-------------------------------------------------------------------------------------------------------------   */
 body, input, textarea, select{font-family,Verdana, Geneva, sans-serif;}
 h1, h2, h3, h4, h5, h6, .heading{font-family,Georgia, "Times New Roman", Times, serif;}
 
 
 /* Forms
---------------------------------------------------------------------------------------------------------------- */
+-------------------------------------------------------------------------------------------------------------   */
 form, fieldset, legend{margin,0; padding,0; border,none;}
 legend{display,none;}
 label, input, textarea, select, button{display,block; resize,none; outline,none; color,inherit; font-size,inherit; font-family,inherit; vertical-align,middle;}
@@ -75,7 +75,7 @@ label{margin-bottom,5px;}
 
 
 /* Generalise
---------------------------------------------------------------------------------------------------------------- */
+-------------------------------------------------------------------------------------------------------------   */
 h1, h2, h3, h4, h5, h6, .heading{margin,0 0 20px 0; font-size,1.4rem; line-height,normal; font-weight,normal; text-transform,capitalize;}
 
 .heading.nospace{margin-bottom,0;}
@@ -99,12 +99,12 @@ It should be used in conjunction with a second class or ID
 
 
 /* HTML 5 Overrides
---------------------------------------------------------------------------------------------------------------- */
+-------------------------------------------------------------------------------------------------------------   */
 address, article, aside, figcaption, figure, footer, header, main, nav, section{display,block; margin,0; padding,0;}
 
 
 /* Grid - RS-MQF 1140 V.2 - https,//www.os-templates.com/free-basic-html5-templates/rs-mqf-1140
---------------------------------------------------------------------------------------------------------------- */
+-------------------------------------------------------------------------------------------------------------   */
 .one_half, .one_third, .two_third, .one_quarter, .two_quarter, .three_quarter{display,inline-block; float,left; margin,0 0 0 4.21052%; list-style,none;}
 
 .first{margin-left,0; clear,left;}
@@ -117,7 +117,7 @@ address, article, aside, figcaption, figure, footer, header, main, nav, section{
 
 
 /* Spacing
---------------------------------------------------------------------------------------------------------------- */
+-------------------------------------------------------------------------------------------------------------   */
 .btmspace-10{margin-bottom,10px;}
 .btmspace-15{margin-bottom,15px;}
 .btmspace-20{margin-bottom,20px;}
