@@ -1,7 +1,8 @@
 $(function () {
     $("#datepicker").datepicker({
         autoclose: true,
-        todayHighlight: true
+        todayHighlight: true,
+        dateFormat: 'dd/mm/yyyy'
     }).datepicker('update', new Date());
 });
 const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -37,25 +38,16 @@ function nextMonth() {
 }
 
 function prevMonth() {
-    console.log("df")
-    clearCal();
-    let d = new Date($("#datepicker").val());
-    var m = d.getMonth();
-    var pm = m - 3;
-    var pDays = 28;
-
-    while (d.getMonth() > pm || d.getDate() - pDays >= 1) {
-        d.setDate(d.getDate() - pDays);
-
+    if (currentMonth === 0) {
+        currentMonth = 11;
+        currentYear -= 1;
+    } else {
+        currentMonth -= 1;
     }
-
-    console.log(d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear())
-    generateCal(d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear());
-
-    $("#datepicker").datepicker('update', new Date(d))
+    myFunction();
+    generateCal();
 
 }
-
 const todayDate = new Date();
 const actualCurrentMonth = todayDate.getMonth();
 const actualCurrentYear = todayDate.getFullYear();
@@ -67,7 +59,11 @@ let monthTwoDays = [];
 let monthThreeDays = [];
 
 function myFunction() {
-
+    if (actualCurrentMonth == currentMonth && actualCurrentYear == currentYear) {
+        document.getElementById("page-left").onclick = null;
+    } else {
+        document.getElementById("page-left").onclick = prevMonth;
+    }
     let monthOneTable = document.getElementById("month1");
     let monthTwoTable = document.getElementById("month2");
     let monthThreeTable = document.getElementById("month3");
@@ -100,6 +96,8 @@ function myFunction() {
                 let cell1 = row.insertCell(j);
                 cell1.className = monthOneDays[i + j + b1].class;
                 let x = document.createElement("span");
+
+                x.className = monthOneDays[i + j + b1].class;
                 x.innerHTML = monthOneDays[i + j + b1].date;
                 cell1.append(x);
             }
@@ -113,6 +111,7 @@ function myFunction() {
                 let cell1 = row.insertCell(j);
                 cell1.className = monthTwoDays[i + j + b2].class;
                 let x = document.createElement("span");
+                x.className = monthTwoDays[i + j + b2].class;
                 x.innerHTML = monthTwoDays[i + j + b2].date;
                 cell1.append(x);
             }
@@ -122,10 +121,12 @@ function myFunction() {
     for (i = 0; i < monthThreeDays.length / 7; i++) {
         let row = monthThreeTable.insertRow(i);
         for (j = 0; j < 7; j++) {
+            // //console.log("i", i, "j", j, "i+j", i + j, "b1", b1)
             if (monthThreeDays[i + j + b3] != undefined) {
                 let cell1 = row.insertCell(j);
                 cell1.className = monthThreeDays[i + j + b3].class;
                 let x = document.createElement("span");
+                x.className = monthThreeDays[i + j + b3].class;
                 x.innerHTML = monthThreeDays[i + j + b3].date;
                 cell1.append(x);
             }
@@ -171,7 +172,7 @@ function generate() {
 
 
 function generateCal(selectedDate) {
-
+   
     let selectedDateMonth = parseInt(selectedDate.split("/")[0]);
     let selectedDateDay = parseInt(selectedDate.split("/")[1]);
 
@@ -293,11 +294,11 @@ function generateCal(selectedDate) {
             monthOneDaysPrev[i].class = 'cyan';
             peakOvul--;
             console.log("cyan")
-        } else if (prep === 0 && normalday === 0 && peakOvul === 0 && postToPeak > 0) {
+        }  else if (prep === 0 && normalday === 0 && peakOvul === 0 && postToPeak > 0) {
             monthOneDaysPrev[i].class = 'normal';
             postToPeak--;
             console.log("postToPeak")
-        } else if (prep === 0 && normalday === 0 && peakOvul === 0 && postToPeak === 0 && postp > 0) {
+        }  else if (prep === 0 && normalday === 0 && peakOvul === 0 && postToPeak === 0 && postp > 0) {
             monthOneDaysPrev[i].class = 'violet';
             postp--;
             console.log("postp")
@@ -311,30 +312,27 @@ function generateCal(selectedDate) {
     monthThreeDays = monthOneDaysObj.slice(monthOne + monthTwo, monthOne + monthTwo + monthThree);
     myFunction();
 }
-
+let m = 0;
 
 function minc() {
-  var m=  document.getElementById('plength');
-  m.value++;
+    m++;
+    document.getElementById('plength').value = m;
 }
 
 function mdec() {
-    m=  document.getElementById('plength');
-    m.value--;
+    m--;
+    document.getElementById('plength').value = m;
 }
-
 let d = 0;
 
 function dinc() {
-    
-    var d=document.getElementById('pdays');
-    d.value++;
+    d++;
+    document.getElementById('pdays').value = d;
 }
 
 function ddec() {
-    
-   d= document.getElementById('pdays');
-   d.value--;
+    d--;
+    document.getElementById('pdays').value = d;
 }
 let values = [];
 let selectedDate;
